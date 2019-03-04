@@ -1,0 +1,61 @@
+
+<!-- saved from url=(0052)http://www.mi-ras.ru/~sk/lehre/dm_hse2018/sfunc.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+</head>
+<body>
+<h3>A simple functional programming language</h3>
+<ul>
+<li><b>Basic type:</b> <tt>nat</tt> (meaning natural numbers)</li>
+<li><b>Types:</b>
+<ul>
+<li><tt>nat</tt> is a type</li>
+<li>If <var>A</var> and <var>B</var> are both types, then <var>A</var><tt> -&gt; </tt><var>B</var> is also a type</li>
+<li><tt>-&gt;</tt>, if parentheses are omitted, associates to the right: <tt>nat -&gt; nat -&gt; nat</tt> means
+<tt>nat -&gt; (nat -&gt; nat)</tt>.
+</li></ul>
+</li><li><b>Constants:</b> 
+<ul>
+<li>natural numbers in decimal notation;</li>
+<li><tt>+</tt>; <tt>*</tt>
+</li></ul>
+</li>
+<li><b>Variables:</b> <tt>x</tt><var>i</var> (<var>i</var> is a natural number in decimal notation)</li>
+<li><b>Context:</b> a sequence of lines of the form <tt>x</tt><var>i</var><tt> : </tt><var>A</var>, where
+<tt>x</tt><var>i</var> is a type and <var>A</var> is a type.
+</li><li><b>Terms:</b> (each term has a unique type!)
+<ul>
+<li>every variable <tt>x</tt><var>i</var> is a term, and its type is the corresponding <var>A</var> from the context;</li>
+<li>every natural constant is a term of type <tt>nat</tt>;</li>
+<li><tt>+</tt> and <tt>*</tt> are terms of type <tt>nat -&gt; nat -&gt; nat;</tt></li>
+<li>if <var>u</var> is a term of type <var>A</var><tt> -&gt; </tt><var>B</var> and <var>v</var> 
+is a term of type <var>A</var>, then <var>uv</var> is a term of type <var>B</var>
+<b>(if <var>u</var> and <var>v</var> have types not of the specified form, <var>uv</var> is
+not a correct term!)</b>;</li>
+<li>if <var>w</var> is a term of type <var>B</var> and <tt>x</tt><var>i</var> is a variable of type <var>A</var>
+(as declared in the context), then <tt>lambda x</tt><var>i</var><tt> . </tt><var>w</var> is a term of type
+<var>A</var><tt> -&gt; </tt><var>B</var>.<br>
+<i>For simplicity, we always suppose that the variable <tt>x</tt><var>i</var> is never used further outside
+this subterm bounded by <tt>lambda</tt>.</i>
+</li><li>Precedence: <tt>lambda</tt> is stronger than application (<var>uv</var>); application associates to the left
+(<var>uvw</var> means <var>(uv)w</var>).
+</li></ul>
+</li><li><b>&#946;-reduction:</b> replace any subterm of the form (<tt>lambda x</tt><var>i</var><tt> . </tt> <var>u</var>)<var>v</var> with
+<var>u</var>[<tt>x</tt><var>i</var> := <var>v</var>], i.e., <var>u</var> with any occurrence of <tt>x</tt><var>i</var> replaced
+with <var>v</var>. 
+</li>
+<li>A <b>functional program</b> of the simple functional language consists of:
+<ul>
+<li>a context (see above);</li>
+<li>a term.</li>
+</ul>
+</li>
+<li>The <b>interpreter</b> should: 
+<ol>
+<li>check that the term is correct (including type checking);</li>
+<li>perform &#946;-reductions until it becomes impossible (i.e., the term is in the normal form; Strong Normalization and Church-Rosser properties
+guarantee that the normal form exists and does not depend on the order of reduction steps);</li>
+<li>if the resulting normal form is of type <tt>nat</tt> and doesn't include variables, compute it as a natural number.</li>
+</ol>
+</li></ul>
+
+</body></html>
